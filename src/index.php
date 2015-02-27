@@ -8,6 +8,7 @@ and open the template in the editor.
 
 
 error_reporting(E_ALL ^ E_NOTICE);
+include_once './app/libs/php/firephp/FirePHP.class.php';
 include_once './app/libs/php/firephp/fb.php';
 ob_start();
 
@@ -19,11 +20,7 @@ ob_start();
     </head>
     <body>
         <?php
-        try{
-            fb('HELLO!!!!!'); 
-        } catch (Exception $ex) {
-            echo $ex->getMessage();
-        }
+            fb('teste');
         ?>
     </body>
 </html>

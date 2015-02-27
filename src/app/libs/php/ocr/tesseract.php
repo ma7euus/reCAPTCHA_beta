@@ -21,8 +21,9 @@ if (!extension_loaded('tesseract')) {
             if (!dl('tesseract.so'))
                 return;
         } else {
-            if (!dl('tesseract.' . PHP_SHLIB_SUFFIX))
-                return;
+            print_r('Nao carregou!');
+//            if (!dl('tesseract.' . PHP_SHLIB_SUFFIX))
+//                return;
         }
     }
 }
@@ -270,7 +271,7 @@ class TessBaseAPI {
     function ClearAdaptiveClassifier() {
         TessBaseAPI_ClearAdaptiveClassifier($this->_cPtr);
     }
-
+            
     function SetImage($imagedata_or_pix, $width = null, $height = null, $bytes_per_pixel = null, $bytes_per_line = null) {
         switch (func_num_args()) {
             case 1: TessBaseAPI_SetImage($this->_cPtr, $imagedata_or_pix);
