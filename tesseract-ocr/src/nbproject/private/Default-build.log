@@ -1,5 +1,0 @@
-gcc -c -fpic main_dummy.cpp -o main_dummy.o  -I. -I /usr/include/tesseract/ -I /usr/include/leptonica -I /usr/include/opencv2 -I/usr/include/php5 -I/usr/include/php5/main -I/usr/include/php5/TSRM -I/usr/include/php5/Zend -I/usr/include/php5/ext -I/usr/include/php5/ext/date/lib
-swig -c++ -php -I. -I/usr/include/tesseract/ -I/usr/include -I/usr/include/leptonica -I/usr/include/opencv2 tesseract.i
-/usr/include/tesseract/publictypes.h:82: Warning 462: Unable to set variable of type char const *[].
-gcc -c -fpic tesseract_wrap.cpp -o tesseract_wrap.o -I /usr/include -I /usr/include/leptonica -I /usr/include/tesseract/ -I /usr/include/opencv2 -I/usr/include/php5 -I/usr/include/php5/main -I/usr/include/php5/TSRM -I/usr/include/php5/Zend -I/usr/include/php5/ext -I/usr/include/php5/ext/date/lib
-gcc -shared main_dummy.o tesseract_wrap.o -o tesseract.so -lstdc++ -ltesseract -llept -lopencv_core 
