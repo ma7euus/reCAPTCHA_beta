@@ -41,8 +41,9 @@ class UploadHandler {
     protected $image_objects = array();
 
     function __construct($options = null, $initialize = true, $error_messages = null) {
+        //print_r($this->get_server_var('REQUEST_METHOD'));
         $this->options = array(
-            'script_url' => $this->get_full_url() . '/',
+            'script_url' => $this->get_full_url() . '/uploader',
             'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')) . '/files/',
             'upload_url' => $this->get_full_url() . '/files/',
             'user_dirs' => false,
@@ -78,7 +79,7 @@ class UploadHandler {
             // is enabled, set to 0 to disable chunked reading of files:
             'readfile_chunk_size' => 10 * 1024 * 1024, // 10 MiB
             // Defines which files can be displayed inline when downloaded:
-            'inline_file_types' => '/\.(gif|jpe?g|png)$/i',
+            'inline_file_types' => '/\.(gif|jpe?g|png|tiff|bmp|raw)$/i',
             // Defines which files (based on their names) are accepted for upload:
             'accept_file_types' => '/.+$/i',
             // The php.ini settings upload_max_filesize and post_max_size
@@ -88,7 +89,7 @@ class UploadHandler {
             // The maximum number of files for the upload directory:
             'max_number_of_files' => null,
             // Defines which files are handled as image files:
-            'image_file_types' => '/\.(gif|jpe?g|png)$/i',
+            'image_file_types' => '/\.(gif|jpe?g|png|tiff|bmp|raw)$/i',
             // Use exif_imagetype on all files to correct file extensions:
             'correct_image_extensions' => false,
             // Image resolution restrictions:
