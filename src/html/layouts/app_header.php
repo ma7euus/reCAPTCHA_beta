@@ -60,13 +60,13 @@
         <![endif]-->
         <script type="text/javascript">
 
-            /*            $(document).ready(function (){
-             $.get("api/foo", function(data) {
-             $(".result" ).html(data);
-             alert("Load was performed.");
+                        $(document).ready(function (){
+             $.get("api/email_exist/mateus@gmail.com", function(data) {
+             //$(".result" ).html(data);
+             //alert("Load was performed.");
              });
              });
-             */
+             
         </script>
 
     </head>

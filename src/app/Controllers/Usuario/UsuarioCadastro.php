@@ -1,16 +1,34 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace app\Controllers\Usuario;
 
-/**
- * Description of UsuarioCadastro
- *
- * @author mateus
- */
-class UsuarioCadastro {
-    //put your code here
+final class UsuarioCadastro {
+
+    /**
+     * 
+     * @param \app\Controllers\Usuario\Arguments\UsuarioCadastroArgs $_args
+     * @return boolean
+     */
+    public function VerificarEmail(Arguments\UsuarioCadastroArgs $_args) {
+        return true;
+    }
+
+    /**
+     * 
+     * @param \app\Controllers\Usuario\Arguments\UsuarioCadastroArgs $_args
+     * @return \app\Controllers\Usuario\Results\UsuarioCadastroResult
+     */
+    public function CadastrarNovoUsuario(Arguments\UsuarioCadastroArgs $_args) {
+        return new Results\UsuarioCadastroResult();
+    }
+
+    /**
+     * 
+     * @param \app\Controllers\Usuario\Arguments\UsuarioCadastroArgs $_args
+     * @return \app\Controllers\Usuario\Results\UsuarioCadastroResult
+     */
+    public function ObterUsuario(Arguments\UsuarioCadastroArgs $_args) {
+        return new Results\UsuarioCadastroResult();
+    }
+
 }

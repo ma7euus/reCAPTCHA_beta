@@ -1,16 +1,32 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace app\Controllers\Usuario;
 
-/**
- * Description of UsuarioMgr
- *
- * @author mateus
- */
-class UsuarioMgr {
-    //put your code here
+final class UsuarioMgr {
+
+    /**
+     * 
+     * @param type $_email
+     * @return boolean
+     */
+    public function ValidarEmailUsuario($_email) {
+        $args = new Arguments\UsuarioCadastroArgs();
+        $args->email = $_email;
+        $usuario = new UsuarioCadastro();
+        return $usuario->VerificarEmail($args);
+    }
+
+    /**
+     * 
+     * @param \stdClass $_dados
+     * @return Results\UsuarioCadastroResult
+     */
+    public function CadastrarUsuario(\stdClass $_dados) {
+        $usuario = new UsuarioCadastro();
+
+        $args = new Arguments\UsuarioCadastroArgs();
+
+        return $usuario->CadastrarNovoUsuario($args);
+    }
+
 }
