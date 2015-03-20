@@ -2,4 +2,4 @@ RewriteEngine On
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule ^(.*)$ http://%{HTTP_HOST}/reCAPTCHA_beta/src/app/controllers/rest/$1 [R=300,L]
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/reCAPTCHA_beta/src/app/Controllers/rest/$1 [R=300,L]

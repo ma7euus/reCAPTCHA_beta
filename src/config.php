@@ -12,6 +12,6 @@ setlocale(LC_ALL, "en_US");
 
 require_once APP_SERVER_DIR.'app/libs/debug/firephp/fb.php';
 
-require_once APP_SERVER_DIR.'app/util/Autoloader.php';
+require_once APP_SERVER_DIR.'app/Utils/Autoloader.php';
 
 $autoLoader = new app\util\Autoloader();
