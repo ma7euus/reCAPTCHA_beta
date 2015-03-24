@@ -203,7 +203,7 @@ class UploadHandler {
 
     protected function get_user_path() {
         if ($this->options['user_dirs']) {
-            return $this->get_user_id() . '/';
+            return \app\Controllers\Usuario\UsuarioAuth::$_userPath . '/';
         }
         return '';
     }

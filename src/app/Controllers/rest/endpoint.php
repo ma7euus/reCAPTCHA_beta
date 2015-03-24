@@ -6,6 +6,8 @@ require_once '../../../config.php';
 
 \app\libs\Slim\Slim::registerAutoloader();
 
+$seila= new app\Controllers\Usuario\UsuarioAuth();
+
 $app = new \app\libs\Slim\Slim();
 $app->response()->header('Content-Type', 'application/json;charset=utf-8');
 

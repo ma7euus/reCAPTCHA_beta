@@ -4,7 +4,8 @@ namespace app\Controllers\Usuario;
 
 final class UsuarioAuth {
 
-    private static $_apiKey;
+    public static $_apiKey;
+    public static $_userPath = 'masdmasdmasdmasmddsm';
 
     /**
      * 
@@ -22,14 +23,6 @@ final class UsuarioAuth {
      */
     public static function AuthApiKey($_apiKey) {
         return true;
-    }
-    
-    /**
-     * 
-     * @return type
-     */
-    public function GetApiKey() {
-        return UsuarioAuth::$_apiKey;
     }
 
     private function GenerateApiKey(){
