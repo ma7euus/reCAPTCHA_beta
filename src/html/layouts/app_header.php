@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--<script src="<?= HTTP_HTML_DIR ?>js/libs/jquery.min.js"></script>-->
         <!-- Bootstrap styles -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
         <!-- Generic page styles -->
         <link rel="stylesheet" href="<?= HTTP_HTML_DIR ?>css/libs/file_upload/style.css">
         <!-- blueimp Gallery styles -->
@@ -33,7 +33,7 @@
         <!-- The Canvas to Blob plugin is included for image resizing functionality -->
         <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
         <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
         <!-- blueimp Gallery script -->
         <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
         <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
@@ -58,6 +58,16 @@
         <!--[if (gte IE 8)&(lt IE 10)]>
         <script src="js/cors/jquery.xdr-transport.js"></script>
         <![endif]-->
+        
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        
         <script type="text/javascript">
 
                         $(document).ready(function (){
