@@ -1,8 +1,8 @@
-<form class="form-signin">
+<!--<form class="form-signin">-->
     <!--<h2 class="form-signin-heading">Acesse</h2>-->
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" id="inputEmail" class="form-control" style="margin-bottom: 10px; margin-top: 40px" placeholder="Endereco de email" required autofocus>
-    <label for="inputPassword" class="sr-only">Senha</label>
-    <input type="password" id="inputPassword"  style="margin-bottom: 20px;" class="form-control" placeholder="Senha" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Entre</button>
-</form>
+    <label for="inputEmail" style="margin-left: 3px; margin-top: 40px; color: #9894a8" class="">Email:</label>
+    <input type="email" id="signin_email" class="form-control" style="margin-bottom: 5px;" placeholder="Endereco de email" required autofocus>
+    <label for="inputPassword" class="" style="margin-left: 3px; color: #9894a8">Senha:</label>
+    <input type="password" id="signin_pass"  style="margin-bottom: 20px;" class="form-control" placeholder="Senha" required>
+    <button class="btn btn-lg btn-primary btn-block" id="actionSignIn" style="cursor: pointer" type="button">Entre</button>
+<!--</form>-->

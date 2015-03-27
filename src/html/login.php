@@ -6,6 +6,7 @@ require_once APP_HTML_DIR . 'layouts/login_header.php';
     
         <div class="container" style="background-color: #ded7f8; padding: 20px 20px 20px 20px; margin-top: 100px; width: 400px; border-radius: 10px; border: 2px solid #c3c0cc">
             <!--<h1>Acesse/Cadastre-se</h1>-->
+            <div style="float: right; display: none;" id="sign_ajax_loader"><img src="<?=HTTP_HTML_DIR?>img/ajax_loader.gif"></div>
             <div id="nav-bar" class="tabbable">
                 <ul class="nav nav-pills">
                     <li class="active"><a href="#tab_sign_in" data-toggle="tab">Entre</a></li>

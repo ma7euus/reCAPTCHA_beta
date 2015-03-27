@@ -13,6 +13,8 @@
         <!-- Bootstrap styles -->
         <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">-->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+        
         <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script>-->
         
         <!-- Latest compiled and minified CSS -->
@@ -23,13 +25,16 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         
+        <script type="text/javascript" src="<?= HTTP_HTML_DIR ?>js/utils/functions.js"></script>
+        <script type="text/javascript" src="<?= HTTP_HTML_DIR ?>js/sign_up_in.js"></script>
+        
         <script type="text/javascript">
 
             $(document).ready(function () {
-                $.get("api/email_exist/mateus@gmail.com", function (data) {
+               // $.get("api/email_exist/mateus@gmail.com", function (data) {
                     //$(".result" ).html(data);
                     //alert("Load was performed.");
-                });
+               // });
             });
 
         </script>
