@@ -10,7 +10,7 @@ final class UsuarioCadastro {
      * @return boolean
      */
     public function VerificarEmail(Arguments\UsuarioCadastroArgs $_args) {
-        return false;
+        return true;
     }
 
     /**
