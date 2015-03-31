@@ -26,6 +26,9 @@ final class UsuarioMgr {
 
         $args = new Arguments\UsuarioCadastroArgs();
 
+        $args->email = $_dados->email;
+        $args->password = $_dados->pass;
+
         return $usuario->CadastrarNovoUsuario($args);
     }
 

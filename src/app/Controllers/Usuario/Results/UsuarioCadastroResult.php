@@ -6,5 +6,5 @@ final class UsuarioCadastroResult {
     
     public $status;
     public $idUser;
-    
+    public $apiKey;
 }

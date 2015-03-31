@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Utils\DB\Results;
+namespace app\Utils\DB\MySQL\Results;
 
 final class DataBaseResultProxy {
 

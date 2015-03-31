@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Utils\DB;
+namespace app\Utils\DB\MySQL;
 
 class MySQL {
 
@@ -76,7 +76,7 @@ class MySQL {
     }
 
     /*
-     * @return result\DataBaseResult
+     * @return Results\DataBaseResult
      */
 
     public function Select($qry, $resultType = MYSQLI_ASSOC) {
@@ -87,20 +87,20 @@ class MySQL {
                 $result->free();
             }
 
-            return new result\DataBaseResult(false, null, new result\DataBaseResultArgs($qry, $this->connection, $result));
+            return new Results\DataBaseResult(false, null, new Results\DataBaseResultArgs($qry, $this->connection, $result));
         }
 
         if ($result instanceof \mysqli_result) {
             $resultArray = $this->BuildArray($result, $resultType);
             $result->free();
-            return new result\DataBaseResult(true, $resultArray, new result\DataBaseResultArgs($qry, $this->connection, $result));
+            return new Results\DataBaseResult(true, $resultArray, new Results\DataBaseResultArgs($qry, $this->connection, $result));
         }
 
         if (is_bool($result)) {
-            return new result\DataBaseResult($result, $result, new result\DataBaseResultArgs($qry, $this->connection, $result));
+            return new Results\DataBaseResult($result, $result, new Results\DataBaseResultArgs($qry, $this->connection, $result));
         }
 
-        return new result\DataBaseResult(true, $result, new result\DataBaseResultArgs($qry, $this->connection, $result));
+        return new Results\DataBaseResult(true, $result, new Results\DataBaseResultArgs($qry, $this->connection, $result));
     }
 
     /**
@@ -120,27 +120,27 @@ class MySQL {
 
     /**
      * @param type string
-     * @return result\DataBaseResult
+     * @return Results\DataBaseResult
      */
     public function Execute($qry) {
         $dbResult = $this->connection->query($qry);
 
-        $dbResultProxy = new result\DataBaseResultProxy();
-        $args = new result\DataBaseResultArgs($qry, $this->connection);
+        $dbResultProxy = new Results\DataBaseResultProxy();
+        $args = new Results\DataBaseResultArgs($qry, $this->connection);
 
         $dbResultProxy
-                ->Set(result\DataBaseResultProxy::propertySuccess, false)
-                ->Set(result\DataBaseResultProxy::propertyResult, null)
-                ->Set(result\DataBaseResultProxy::propertyArgs, $args);
+                ->Set(Results\DataBaseResultProxy::propertySuccess, false)
+                ->Set(Results\DataBaseResultProxy::propertyResult, null)
+                ->Set(Results\DataBaseResultProxy::propertyArgs, $args);
 
         if (is_bool($dbResult) && $dbResult === true) {
-            $dbResultProxy->Set(result\DataBaseResultProxy::propertySuccess, true);
+            $dbResultProxy->Set(Results\DataBaseResultProxy::propertySuccess, true);
         } else if (is_object($dbResult)) {
 
-            $dbResultProxy->Set(result\DataBaseResultProxy::propertySuccess, true);
+            $dbResultProxy->Set(Results\DataBaseResultProxy::propertySuccess, true);
             if ($dbResult instanceof \mysqli_result) {
                 $args->SetAffectedRows($dbResult);
-                $dbResultProxy->Set(result\DataBaseResultProxy::propertyArgs, $args);
+                $dbResultProxy->Set(Results\DataBaseResultProxy::propertyArgs, $args);
             }
         }
 

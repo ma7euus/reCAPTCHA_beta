@@ -10,7 +10,8 @@ final class UsuarioCadastro {
      * @return boolean
      */
     public function VerificarEmail(Arguments\UsuarioCadastroArgs $_args) {
-        return true;
+        $user = new \app\Models\Usuario();
+        return $user->VerificarEmail($_args->email);
     }
 
     /**
@@ -19,7 +20,21 @@ final class UsuarioCadastro {
      * @return \app\Controllers\Usuario\Results\UsuarioCadastroResult
      */
     public function CadastrarNovoUsuario(Arguments\UsuarioCadastroArgs $_args) {
-        return new Results\UsuarioCadastroResult();
+        $userModel = new \app\Models\EntityModels\UsuarioModel();
+
+        //$userModel->id = 0;
+        $userModel->email = $_args->email;
+        $userModel->senha = $_args->password;
+        $userModel->data = date('Y-m-d H:i:s');
+        $userModel->apiKey = md5(date('sY:dm-H') . rand(1, 99999)) .'+'.  md5($_args->password);
+        
+        $user = new \app\Models\Usuario();
+        $result = new Results\UsuarioCadastroResult();
+        $result->idUser = $user->GravarCadastroUsuario($userModel);
+        $result->status = true;
+        $result->apiKey = $userModel->apiKey;
+        
+        return $result;
     }
 
     /**

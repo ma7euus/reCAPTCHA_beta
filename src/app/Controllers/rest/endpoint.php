@@ -6,7 +6,7 @@ require_once '../../../config.php';
 
 \app\libs\Slim\Slim::registerAutoloader();
 
-$seila= new app\Controllers\Usuario\UsuarioAuth();
+$seila = new app\Controllers\Usuario\UsuarioAuth();
 
 $app = new \app\libs\Slim\Slim();
 $app->response()->header('Content-Type', 'application/json;charset=utf-8');
@@ -14,6 +14,8 @@ $app->response()->header('Content-Type', 'application/json;charset=utf-8');
 $app->get('/email_exist/:email', 'validarEmail');
 
 $app->post('/signup', 'cadastrarUsuario');
+
+$app->post('/signin', 'autenticarUsuario');
 
 $app->get('/foo', function () {
     error_log("fooooooooooooooooo");
@@ -28,8 +30,7 @@ $app->map('/uploader', function() {
 
 $app->run();
 
-
-function validarEmail($_email){
+function validarEmail($_email) {
     $_userMgr = new app\Controllers\Usuario\UsuarioMgr();
     $retorno = array();
     $retorno['status'] = $_userMgr->ValidarEmailUsuario($_email);
@@ -37,9 +38,13 @@ function validarEmail($_email){
 }
 
 function cadastrarUsuario() {
-
+    $app = new \app\libs\Slim\Slim();
     $dados = $app->request()->getBody();
     $_userMgr = new app\Controllers\Usuario\UsuarioMgr();
+    $retorno = $_userMgr->CadastrarUsuario(json_decode($dados));
+    $_SESSION['ApiKeyAuthSession'] = $retorno->apiKey;
+}
 
-    $_userMgr->CadastrarUsuario(json_decode($dados));
+function autenticarUsuario() {
+    $_SESSION['ApiKeyAuthSession'] = $retorno->apiKey;
 }
