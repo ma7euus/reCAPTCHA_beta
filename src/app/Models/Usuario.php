@@ -56,4 +56,24 @@ final class Usuario {
         return true;
     }
 
+    /**
+     * 
+     * @param type $_email
+     * @param type $_senha
+     * @return \app\Models\EntityModels\UsuarioModel
+     */
+    public function AutenticarUsuario($_email, $_senha) {
+        $qry = "SELECT * FROM usuarios WHERE email = '{$_email}' AND senha='{$_senha}' ";
+        $result = \app\Utils\DB\MySQL\MySQL::Instance()->Select($qry);
+        if ($result->isSuccess()) {
+            $result = $result->getResult();
+            if (count($result) > 0) {
+                $userModel = new EntityModels\UsuarioModel();
+                $userModel->SetValues($result);
+                return $userModel;
+            }
+        }
+        return NULL;
+    }
+
 }

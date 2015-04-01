@@ -32,4 +32,12 @@ final class UsuarioMgr {
         return $usuario->CadastrarNovoUsuario($args);
     }
 
+    /**
+     * 
+     * @param \stdClass $_dados
+     * @return Results\UsuarioResult
+     */
+    public function AutenticarUsuario(\stdClass $_dados){
+        return UsuarioAuth::AuthUserPass($_dados->email, $_dados->pass);
+    }
 }

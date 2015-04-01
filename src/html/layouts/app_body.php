@@ -1,4 +1,4 @@
-<body>
+<body style="background-color: #efefef">
   <div class="container">
     <h1>OCR WEB</h1>
     <h2 class="lead">Gereciamento de arquivos</h2>

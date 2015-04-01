@@ -24,7 +24,7 @@ final class UsuarioCadastro {
 
         //$userModel->id = 0;
         $userModel->email = $_args->email;
-        $userModel->senha = $_args->password;
+        $userModel->senha = md5($_args->password);
         $userModel->data = date('Y-m-d H:i:s');
         $userModel->apiKey = md5(date('sY:dm-H') . rand(1, 99999)) .'+'.  md5($_args->password);
         

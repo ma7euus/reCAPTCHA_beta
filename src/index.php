@@ -2,7 +2,7 @@
 
 include_once './config.php';
 
-$logado = false;
+$logado = isset($_SESSION['is_logged']) ? $_SESSION['is_logged'] : false;
 
 if($logado){
     include_once APP_HTML_DIR . "app.php";

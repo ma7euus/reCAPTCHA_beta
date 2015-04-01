@@ -70,12 +70,12 @@
         
         <script type="text/javascript">
 
-                        $(document).ready(function (){
-             $.get("api/email_exist/mateus@gmail.com", function(data) {
+             //           $(document).ready(function (){
+             //$.get("api/email_exist/mateus@gmail.com", function(data) {
              //$(".result" ).html(data);
              //alert("Load was performed.");
-             });
-             });
+             //});
+             //});
              
         </script>
 

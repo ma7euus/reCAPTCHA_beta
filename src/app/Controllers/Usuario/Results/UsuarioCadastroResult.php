@@ -2,9 +2,6 @@
 
 namespace app\Controllers\Usuario\Results;
 
-final class UsuarioCadastroResult {
+final class UsuarioCadastroResult extends UsuarioResult {
     
-    public $status;
-    public $idUser;
-    public $apiKey;
 }

@@ -44,7 +44,8 @@ function signIn() {
     $.post("api/signin", JSON.stringify(dados)).always(function () {
         //alert("ALWAYS");
     }).done(function (result) {
-        //alert("DONE");
+        if (result.auth)
+            $(location).attr('href', 'index.php');
     });
 }
 
@@ -58,7 +59,8 @@ function signUp() {
     $.post("api/signup", JSON.stringify(dados)).always(function () {
         //alert("ALWAYS");
     }).done(function (result) {
-        //alert("DONE");
+        if(result.auth)
+            $(location).attr('href', 'index.php');
     });
 }
 
