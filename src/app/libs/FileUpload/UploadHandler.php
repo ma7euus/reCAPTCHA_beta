@@ -44,8 +44,8 @@ class UploadHandler {
         //print_r($this->get_server_var('REQUEST_METHOD'));
         $this->options = array(
             'script_url' => $this->get_full_url() . '/uploader',
-            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')) . '/files/',
-            'upload_url' => $this->get_full_url() . '/files/',
+            'upload_dir' => APP_SERVER_DIR . '/user_files/',
+            'upload_url' => HTTP_DIR . '/user_files/',
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',

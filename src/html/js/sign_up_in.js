@@ -25,6 +25,8 @@ $(document).ready(function () {
     });
 
     $("#actionSignIn").bind("click", function () {
+        $("#div_error_auth").hide("slide", {direction: "up"}, "fast");
+        $("#sign_ajax_loader").show();
         signIn();
     });
 
@@ -38,14 +40,17 @@ $(document).ready(function () {
 function signIn() {
     var dados = {};
 
-    dados.email = $("#signup_email").val();
-    dados.pass = $("#signup_pass").val();
+    dados.email = $("#signin_email").val();
+    dados.pass = $("#signin_pass").val();
 
     $.post("api/signin", JSON.stringify(dados)).always(function () {
         //alert("ALWAYS");
     }).done(function (result) {
+        $("#sign_ajax_loader").hide();
         if (result.auth)
             $(location).attr('href', 'index.php');
+        else
+            $("#div_error_auth").show("slide", {direction: "up"}, "fast");
     });
 }
 

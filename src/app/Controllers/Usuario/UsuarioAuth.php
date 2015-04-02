@@ -17,15 +17,15 @@ final class UsuarioAuth {
     public static function AuthUserPass($_email, $_password) {
         $_password = md5($_password);
         $user = new \app\Models\Usuario();
-        $result = $user->AutenticarUsuario($_password, $_email);
+        $result = $user->AutenticarUsuario($_email, $_password);
         $retorno = new Results\UsuarioResult();
         if($result){
            $retorno->status = true;
            $retorno->apiKey = $result->apiKey;
            $retorno->idUser = $result->id;
-           $retorno->dirUser = md5($result->email);
-        }
-        $retorno->status = false;
+           $retorno->dirUser = md5($result->email . $result->id);
+        }else $retorno->status = false;
+        
         return $retorno;
     }
 

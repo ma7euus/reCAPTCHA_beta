@@ -2,9 +2,6 @@
   <div class="container">
     <h1>OCR WEB</h1>
     <h2 class="lead">Gereciamento de arquivos</h2>
-    <ul class="nav nav-tabs">
-        <li class="active"><a href=""></a></li>
-    </ul>
     <br>
     <!-- The file upload form used as target for the file upload widget -->
     <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
