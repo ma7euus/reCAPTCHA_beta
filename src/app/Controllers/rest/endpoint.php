@@ -42,7 +42,8 @@ $app->map('/uploader', function() {
         $dados = '[{"nome":"10435540_324473857716680_4762892084221297786_n.jpg"},{"nome":"10995924_758072374289551_5849189307126465462_n.jpg"},{"nome":"11065483_789233101167699_5154074558589806801_n.jpg"}]';
         $dados = json_decode($dados);
         $result = $arqTest->ObterInfoArquivosParaDigitalizacao($dados);
-        fb($result);
+        $ocr = new app\Controllers\OCR\OCRMgr();
+        $ocr->ProcessarArquivos($result);
         
     }
 })->via('GET', 'POST', 'OPTIONS', 'HEAD', 'PATCH', 'PUT', 'DELETE');

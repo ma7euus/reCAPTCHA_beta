@@ -23,10 +23,9 @@ final class ArquivosMgr {
             if (file_exists($path_file_name)) {
                 preg_match("/(gif|bmp|png|jpg|jpeg|tiff|raw){1}$/i", $arq->nome, $ext);
                 $arquivo = new Arguments\ArquivoArgs($arq->nome, filetype($path_file_name), $ext[0], $this->_pathBase, filesize($path_file_name));
+                array_push($arquivos, $arquivo);
             }
         }
-
-        array_push($arquivos, $arquivo);
         return $arquivos;
     }
 

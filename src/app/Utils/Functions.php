@@ -13,7 +13,7 @@ final class Functions {
     public static function CreateFolder($_local = '/tmp/', $_name = 'xxxx') {
         $path = $_local . $_name;
         if (!file_exists($path)) {
-            return mkdir($path, 0777);
+            return (mkdir($path, 0777, true) ? chmod($path, 0777) : false);
         }
         return true;
     }
@@ -58,6 +58,14 @@ final class Functions {
             return strstr(strtolower($string), strtolower($search), false);
 
         return strstr($string, $search, false);
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public static function GenerateUniqueID() {
+        return md5(uniqid(rand(), true));
     }
 
 }
