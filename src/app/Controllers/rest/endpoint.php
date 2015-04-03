@@ -8,11 +8,11 @@ require_once '../../../config.php';
 
 $logado = isset($_SESSION['is_logged']) ? $_SESSION['is_logged'] : false;
 
-if($logado){
+if ($logado) {
     \app\Controllers\Usuario\UsuarioAuth::$_apiKey = $_SESSION['ApiKeyAuthSession'];
     \app\Controllers\Usuario\UsuarioAuth::$_userID = $_SESSION['idUser'];
     \app\Controllers\Usuario\UsuarioAuth::$_userPath = $_SESSION['dirUser'];
-}else{
+} else {
     \app\Controllers\Usuario\UsuarioAuth::$_apiKey = NULL;
     \app\Controllers\Usuario\UsuarioAuth::$_userID = NULL;
     \app\Controllers\Usuario\UsuarioAuth::$_userPath = NULL;
@@ -34,19 +34,13 @@ $app->get('/foo', function () {
 
 $app->map('/uploader', function() {
     $logado = isset($_SESSION['is_logged']) ? $_SESSION['is_logged'] : false;
-    if($logado){
+    if ($logado) {
         $options['user_dirs'] = true;
         $upload_handler = new app\libs\FileUpload\UploadHandler($options);
-        
-        $arqTest = new \app\Controllers\Arquivos\ArquivosMgr();
-        $dados = '[{"nome":"10435540_324473857716680_4762892084221297786_n.jpg"},{"nome":"10995924_758072374289551_5849189307126465462_n.jpg"},{"nome":"11065483_789233101167699_5154074558589806801_n.jpg"}]';
-        $dados = json_decode($dados);
-        $result = $arqTest->ObterInfoArquivosParaDigitalizacao($dados);
-        $ocr = new app\Controllers\OCR\OCRMgr();
-        $ocr->ProcessarArquivos($result);
-        
     }
 })->via('GET', 'POST', 'OPTIONS', 'HEAD', 'PATCH', 'PUT', 'DELETE');
+
+$app->post('/ocr_exe', 'digitalizarArquivos');
 
 $app->run();
 
@@ -62,10 +56,10 @@ function cadastrarUsuario() {
     $dados = $app->request()->getBody();
     $_userMgr = new app\Controllers\Usuario\UsuarioMgr();
     $retorno = $_userMgr->CadastrarUsuario(json_decode($dados));
-    if($retorno->status){
+    if ($retorno->status) {
         create_var_session($retorno);
         echo '{"function_exe":"", "auth": true}';
-    }else{
+    } else {
         echo '{"function_exe":"", "auth": false}';
     }
 }
@@ -75,16 +69,26 @@ function autenticarUsuario() {
     $dados = $app->request()->getBody();
     $_userMgr = new app\Controllers\Usuario\UsuarioMgr();
     $retorno = $_userMgr->AutenticarUsuario(json_decode($dados));
-    if($retorno->status){
+    if ($retorno->status) {
         create_var_session($retorno);
         echo '{"function_exe":"", "auth": true}';
-    }else{
+    } else {
         echo '{"function_exe":"", "auth": false}';
     }
 }
 
+function digitalizarArquivos() {
+    $app = new \app\libs\Slim\Slim();
+    $dados = $app->request()->getBody();
+    $arqTest = new \app\Controllers\Arquivos\ArquivosMgr();
+    //$dados = '[{"nome":"10435540_324473857716680_4762892084221297786_n.jpg"},{"nome":"10995924_758072374289551_5849189307126465462_n.jpg"},{"nome":"11065483_789233101167699_5154074558589806801_n.jpg"}]';
+    $result = $arqTest->ObterInfoArquivosParaDigitalizacao(json_decode($dados));
+    $ocr = new app\Controllers\OCR\OCRMgr();
+    $r = $ocr->ProcessarArquivos($result);
+    //fb($r);
+}
 
-function create_var_session(app\Controllers\Usuario\Results\UsuarioResult $_s){
+function create_var_session(app\Controllers\Usuario\Results\UsuarioResult $_s) {
     $_SESSION['ApiKeyAuthSession'] = $_s->apiKey;
     $_SESSION['is_logged'] = true;
     $_SESSION['session_id'] = session_id();

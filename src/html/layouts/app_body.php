@@ -9,20 +9,24 @@
         <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="row fileupload-buttonbar">
-            <div class="col-lg-7">
+            <div class="col-lg-9">
                 <!-- The fileinput-button span is used to style the file input field as button -->
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>Add Imagens...</span>
                     <input type="file" name="files[]" multiple>
                 </span>
-                <button type="submit" class="btn btn-primary start">
+                <button type="submit" class="btn btn-info start">
                     <i class="glyphicon glyphicon-upload"></i>
                     <span>Iniciar upload</span>
                 </button>
                 <button type="reset" class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Cancelar upload</span>
+                </button>
+                <button type="submit" class="btn btn-primary start">
+                    <i class="glyphicon glyphicon-cog"></i>
+                    <span>Iniciar Digitalização</span>
                 </button>
                 <button type="button" class="btn btn-danger delete">
                     <i class="glyphicon glyphicon-trash"></i>
@@ -74,7 +78,7 @@
         </td>
         <td>
             {% if (!i && !o.options.autoUpload) { %}
-                <button class="btn btn-primary start" disabled>
+                <button class="btn btn-info start" disabled>
                     <i class="glyphicon glyphicon-upload"></i>
                     <span>Importar</span>
                 </button>
@@ -117,6 +121,10 @@
         </td>
         <td>
             {% if (file.deleteUrl) { %}
+                <button class="btn btn-primary start ocr_file" id="{%=file.name%}">
+                        <i class="glyphicon glyphicon-cog"></i>
+                    <span>Digitalizar</span>
+                </button>
                 <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
                     <span>Deletar</span>

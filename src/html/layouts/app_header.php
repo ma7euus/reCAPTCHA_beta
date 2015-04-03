@@ -68,6 +68,8 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         
+        <script type="text/javascript" src="<?= HTTP_HTML_DIR ?>js/file_list_helper.js">
+        
         <script type="text/javascript">
 
              //           $(document).ready(function (){

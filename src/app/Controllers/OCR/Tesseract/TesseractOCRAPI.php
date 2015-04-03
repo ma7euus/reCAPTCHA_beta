@@ -11,8 +11,8 @@ final class TesseractOCRAPI {
     private $_tessArgs = array();
 
     public function __construct($_img_file_path, $_txt_file_result, $_lang = 'en') {
-       // array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs(null, 'sudo'));
-       // array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs('u', 'mateus'));
+        // array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs(null, 'sudo'));
+        // array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs('u', 'mateus'));
         array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs(null, 'tesseract'));
         array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs(null, $_img_file_path));
         array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs(null, $_txt_file_result));
@@ -37,9 +37,8 @@ final class TesseractOCRAPI {
         }
         $commandLine = str_replace('  ', ' ', $commandLine);
 
-        fb($commandLine);
+        //fb($commandLine);
         $out = exec($commandLine);
-        fb($out);
     }
 
 }
