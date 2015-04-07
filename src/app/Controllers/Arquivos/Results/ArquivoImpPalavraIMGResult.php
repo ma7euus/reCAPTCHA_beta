@@ -2,6 +2,8 @@
 
 namespace app\Controllers\Arquivos\Results;
 
-final class ArquivoImpPalavraIMGResult extends ArquivoImpResult {
-    
+final class ArquivoImpPalavraIMGResult {
+
+    public $dados;
+
 }

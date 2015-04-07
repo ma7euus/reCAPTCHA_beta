@@ -24,7 +24,7 @@
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Cancelar upload</span>
                 </button>
-                <button type="submit" class="btn btn-primary start">
+                <button type="submit" class="btn btn-primary start-dig">
                     <i class="glyphicon glyphicon-cog"></i>
                     <span>Iniciar Digitalização</span>
                 </button>
@@ -121,7 +121,7 @@
         </td>
         <td>
             {% if (file.deleteUrl) { %}
-                <button class="btn btn-primary start ocr_file" id="{%=file.name%}">
+                <button class="btn btn-primary start-dig ocr_file" data-type="POST" id="{%=file.name%}">
                         <i class="glyphicon glyphicon-cog"></i>
                     <span>Digitalizar</span>
                 </button>

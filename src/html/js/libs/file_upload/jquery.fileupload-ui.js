@@ -516,7 +516,11 @@
                 data.submit();
             }
         },
-
+        _startOCRDigHandler: function (e) {
+            e.preventDefault();
+            var button = $(e.currentTarget);
+            _sendToOCRProcess(e);
+        },
         _cancelHandler: function (e) {
             e.preventDefault();
             var template = $(e.currentTarget)
@@ -575,6 +579,13 @@
                     filesList.find('.start').click();
                 }
             });
+            this._on(fileUploadButtonBar.find('.start-dig'), {
+                click: function (e) {
+                    e.preventDefault();
+                    //console.log(e);
+                    filesList.find('.start-dig').click();
+                }
+            });
             this._on(fileUploadButtonBar.find('.cancel'), {
                 click: function (e) {
                     e.preventDefault();
@@ -604,7 +615,7 @@
         _destroyButtonBarEventHandlers: function () {
             this._off(
                 this.element.find('.fileupload-buttonbar')
-                    .find('.start, .cancel, .delete'),
+                    .find('.start, .cancel, .delete, .start-dig'),
                 'click'
             );
             this._off(
@@ -618,7 +629,8 @@
             this._on(this.options.filesContainer, {
                 'click .start': this._startHandler,
                 'click .cancel': this._cancelHandler,
-                'click .delete': this._deleteHandler
+                'click .delete': this._deleteHandler,
+                'click .start-dig': this._startOCRDigHandler
             });
             this._initButtonBarEventHandlers();
         },

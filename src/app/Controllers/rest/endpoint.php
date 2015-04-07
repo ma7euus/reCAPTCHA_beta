@@ -80,12 +80,13 @@ function autenticarUsuario() {
 function digitalizarArquivos() {
     $app = new \app\libs\Slim\Slim();
     $dados = $app->request()->getBody();
-    $arqTest = new \app\Controllers\Arquivos\ArquivosMgr();
+    $arqMgr = new \app\Controllers\Arquivos\ArquivosMgr();
     //$dados = '[{"nome":"10435540_324473857716680_4762892084221297786_n.jpg"},{"nome":"10995924_758072374289551_5849189307126465462_n.jpg"},{"nome":"11065483_789233101167699_5154074558589806801_n.jpg"}]';
-    $result = $arqTest->ObterInfoArquivosParaDigitalizacao(json_decode($dados));
+    $result = $arqMgr->ObterInfoArquivosParaDigitalizacao(json_decode($dados));
     $ocr = new app\Controllers\OCR\OCRMgr();
-    $r = $ocr->ProcessarArquivos($result);
-    //fb($r);
+    $ocrResults = $ocr->ProcessarArquivos($result);
+    $result = $arqMgr->ProcessarArquivosGerados($ocrResults);
+    //fb($result);
 }
 
 function create_var_session(app\Controllers\Usuario\Results\UsuarioResult $_s) {

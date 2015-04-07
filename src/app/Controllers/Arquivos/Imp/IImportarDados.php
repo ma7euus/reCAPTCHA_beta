@@ -1,11 +1,11 @@
 <?php
 
-namespace app\Controllers\Arquivos\Imp\Strategies;
+namespace app\Controllers\Arquivos\Imp;
 
 use \app\Controllers\Arquivos\Arguments\ArquivoArgs;
 use \app\Controllers\Arquivos\Results\ArquivoImpResult;
 
-interface IImportarDadosStrategy {
+interface IImportarDados {
 
     /**
      * 
