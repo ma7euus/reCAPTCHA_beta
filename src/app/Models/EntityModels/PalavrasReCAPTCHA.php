@@ -2,7 +2,7 @@
 
 namespace app\Models\EntityModels;
 
-final class PalavrasResolvidasModel extends EntityModel {
+final class PalavrasReCAPTCHA extends EntityModel {
 
     public function SetDefaultValues() {
         
