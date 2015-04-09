@@ -19,9 +19,13 @@ final class PalavrasModel extends EntityModel {
      */
     public $_PalavrasReCAPTCHA;
 
-    public function __construct() {
+    public function __construct($_numTextoReferencia = '', $_texto = '', $_taxaAcertoOcr = 0.0, $_fragmentoImg = '') {
         parent::__construct();
         $this->_PalavrasReCAPTCHA = array();
+        $this->numTextoReferencia = $_numTextoReferencia;
+        $this->texto = $_texto;
+        $this->taxaAcertoOCR = $_taxaAcertoOcr;
+        $this->fragmentoImg = $_fragmentoImg;
     }
 
     public function SetDefaultValues() {

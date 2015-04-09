@@ -17,6 +17,7 @@ final class OCRMgr {
         foreach ($_arquivos as $_arq) {
             if (\app\Utils\Functions::CreateFolder($_arq->localizacao, 'tmp')) {
                 $tempDirArq = \app\Utils\Functions::GenerateUniqueID();
+                /** criar diretorio temporario **/
                 if (\app\Utils\Functions::CreateFolder("{$_arq->localizacao}tmp/", $tempDirArq)) {
                     $tess = new Tesseract\TesseractOCRAPI("{$_arq->localizacao}{$_arq->nome}", "{$_arq->localizacao}tmp/{$tempDirArq}/text_ref");
                     $tess->AddParametro(new Arguments\TesseractOCRAPIArgs('u', "{$_arq->localizacao}tmp/"));

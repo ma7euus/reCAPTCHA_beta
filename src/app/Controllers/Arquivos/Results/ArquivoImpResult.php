@@ -12,6 +12,17 @@ class ArquivoImpResult {
     
     /**
      *
+     * @var string
+     */
+    public $nomeImagem;
+
+    /**
+     *
+     * @var \DateInterval
+     */
+    public $tempo;
+    /**
+     *
      * @var ArquivoImpXMLResult[]
      */
     public $dadosXML;

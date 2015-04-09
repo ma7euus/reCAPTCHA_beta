@@ -86,7 +86,9 @@ function digitalizarArquivos() {
     $ocr = new app\Controllers\OCR\OCRMgr();
     $ocrResults = $ocr->ProcessarArquivos($result);
     $result = $arqMgr->ProcessarArquivosGerados($ocrResults);
-    //fb($result);
+    $classificador = new \app\Controllers\Processadores\Classificador();
+    $result = $classificador->ClassificarArquivos($result);
+    $arqMgr->GravarArquivosProcessados($result);
 }
 
 function create_var_session(app\Controllers\Usuario\Results\UsuarioResult $_s) {

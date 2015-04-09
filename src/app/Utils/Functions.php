@@ -68,4 +68,26 @@ final class Functions {
         return md5(uniqid(rand(), true));
     }
 
+    /**
+     * 
+     * @param type $_dir
+     */
+    public static function ForceRMDir($_dir) {
+
+        if ($dd = opendir($_dir)) {
+            while (false !== ($arq = readdir($dd))) {
+                if ($arq != "." && $arq != "..") {
+                    $path = "$_dir/$arq";
+                    if (is_dir($path)) {
+                        Functions::ForceRMDir($path);
+                    } elseif (is_file($path)) {
+                        unlink($path);
+                    }
+                }
+            }
+            closedir($dd);
+        }
+        rmdir($_dir);
+    }
+
 }
