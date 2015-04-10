@@ -26,7 +26,9 @@ class ArquivoImpResult {
      * @var ArquivoImpXMLResult[]
      */
     public $dadosXML;
- 
+    
+    public $tmpId;
+
     public function __construct() {
         $this->dadosXML = array();
     }

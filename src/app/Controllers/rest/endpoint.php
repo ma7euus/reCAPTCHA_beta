@@ -88,7 +88,11 @@ function digitalizarArquivos() {
     $result = $arqMgr->ProcessarArquivosGerados($ocrResults);
     $classificador = new \app\Controllers\Processadores\Classificador();
     $result = $classificador->ClassificarArquivos($result);
-    $arqMgr->GravarArquivosProcessados($result);
+    if($arqMgr->GravarArquivosProcessados($result)){
+        echo json_encode(array('status'=>true,'dados'=>$result));
+    }else{
+        echo '{"status":false}';
+    }
 }
 
 function create_var_session(app\Controllers\Usuario\Results\UsuarioResult $_s) {

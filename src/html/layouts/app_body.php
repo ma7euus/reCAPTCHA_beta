@@ -108,6 +108,11 @@
             <p class="name">
                 {% if (file.url) { %}
                     <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                    </br>
+                    <div class='labels' style='margin-top: 30px; display: none;'>
+                        <span id="total_{%=file.tmpId%}" class='label label-primary'>Total Palavras: 0</span>
+                        <span id="corretas_{%=file.tmpId%}" class='label label-success'>Palavras Reconhecidas: 0</span>
+                    </div>
                 {% } else { %}
                     <span>{%=file.name%}</span>
                 {% } %}
@@ -121,7 +126,7 @@
         </td>
         <td>
             {% if (file.deleteUrl) { %}
-                <button class="btn btn-primary start-dig ocr_file" data-type="POST" id="{%=file.name%}">
+                <button class="btn btn-primary start-dig ocr_file" data-type="POST" id="{%=file.tmpId%}" name="{%=file.name%}">
                         <i class="glyphicon glyphicon-cog"></i>
                     <span>Digitalizar</span>
                 </button>
@@ -136,6 +141,9 @@
                     <span>Cancelar</span>
                 </button>
             {% } %}
+        </td>
+        <td class="loader">
+           <div style="display:none;" class="ajax-loader"><img src="<?=HTTP_HTML_DIR?>img/ajax_loader.gif"></div>
         </td>
     </tr>
 {% } %}

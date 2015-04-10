@@ -18,7 +18,8 @@ final class Classificador {
             $arquivoDigitalizado->nomeImagem = $arq->nomeImagem;
             $arquivoDigitalizado->tempoOCRProcess = $arq->tempo->s;
             $arquivoDigitalizado->txtReferenciaPalavras = $arq->textoReferencia->conteudo;
-
+            $arquivoDigitalizado->_tmpId = $arq->tmpId;
+            
             $cRetorno = new Results\ClassificadorResult($arquivoDigitalizado);
             foreach ($arq->dadosXML as $xmlResult) {
                 $palavra = $this->ClassificarPalavra(new \app\Models\EntityModels\PalavrasModel($xmlResult->img_id, $xmlResult->texto, $xmlResult->certainty, $xmlResult->image->dados));

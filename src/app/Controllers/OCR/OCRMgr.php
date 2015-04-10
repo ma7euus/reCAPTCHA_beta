@@ -24,7 +24,7 @@ final class OCRMgr {
                     $tess->AddParametro(new Arguments\TesseractOCRAPIArgs('i', "{$tempDirArq}"));
                     $start = new \DateTime();
                     $tess->Executar();
-                    array_push($results, new Results\OCRProcessamentoResult($tempDirArq, $_arq->nome, "{$_arq->localizacao}tmp/{$tempDirArq}/", $start));
+                    array_push($results, new Results\OCRProcessamentoResult($tempDirArq, $_arq->nome, "{$_arq->localizacao}tmp/{$tempDirArq}/", $start, $_arq->tmpId));
                 }
             }
         }

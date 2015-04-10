@@ -22,7 +22,7 @@ final class ArquivosMgr {
             $path_file_name = $this->_pathBase . $arq->nome;
             if (file_exists($path_file_name)) {
                 preg_match("/(gif|bmp|png|jpg|jpeg|tiff|raw){1}$/i", $arq->nome, $ext);
-                $arquivo = new Arguments\ArquivoArgs($arq->nome, filetype($path_file_name), $ext[0], $this->_pathBase, filesize($path_file_name));
+                $arquivo = new Arguments\ArquivoArgs($arq->nome, filetype($path_file_name), $ext[0], $this->_pathBase, filesize($path_file_name), $arq->tmpId);
                 array_push($arquivos, $arquivo);
             }
         }
@@ -42,7 +42,8 @@ final class ArquivosMgr {
             $arquivoResult->textoReferencia = $txt->Importar(new Arguments\ArquivoArgs("text_ref", "text", "txt", $ocrResult_value->path));
             $arquivoResult->nomeImagem = $ocrResult_value->arqNameRef;
             $arquivoResult->tempo = $ocrResult_value->processingTime;
-
+            $arquivoResult->tmpId = $ocrResult_value->tmpId;
+            
             foreach (glob("{$ocrResult_value->path}*.xml") as $file_value) {
                 $xml = new Imp\ImportarDadosXML();
                 $arquivoResult->AddDadosXML($xml->Importar(new Arguments\ArquivoArgs($file_value, 'text', 'xml', $ocrResult_value->path)));
@@ -70,6 +71,8 @@ final class ArquivosMgr {
                 $palavras->GravarPalavras($palavra);
             }
         }
+        
+        return true;
     }
 
 }

@@ -31,6 +31,9 @@ final class ArquivosDigitalizadosModel extends EntityModel {
      */
     public $_Palavras;
 
+    public $_tmpId;
+
+
     public function __construct() {
         parent::__construct();
         $this->_Palavras = array();
