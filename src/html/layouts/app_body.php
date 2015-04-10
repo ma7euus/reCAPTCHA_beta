@@ -24,10 +24,10 @@
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Cancelar upload</span>
                 </button>
-                <button type="submit" class="btn btn-primary start-dig">
+               <!-- <button type="submit" class="btn btn-primary start-dig">
                     <i class="glyphicon glyphicon-cog"></i>
                     <span>Iniciar Digitalização</span>
-                </button>
+                </button> -->
                 <button type="button" class="btn btn-danger delete">
                     <i class="glyphicon glyphicon-trash"></i>
                     <span>Deletar</span>

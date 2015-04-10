@@ -32,6 +32,8 @@ function _sendToOCRProcess(e) {
                 $('#total_' + dadosArq._tmpId).html('Total de Palavras: ' + dadosArq.numTotalPalavras);
                 $('#corretas_' + dadosArq._tmpId).html('Palavras Reconhecidas: ' + dadosArq.numPalavrasCorretas);
                 $('#total_' + dadosArq._tmpId).parent().show();
+                $("#"+dadosArq._tmpId).attr("disabled", true);
+                $("#"+dadosArq._tmpId).unbind('click');
             });
         }
     });
