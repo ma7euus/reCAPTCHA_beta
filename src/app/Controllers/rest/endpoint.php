@@ -42,6 +42,9 @@ $app->map('/uploader', function() {
 
 $app->post('/ocr_exe', 'digitalizarArquivos');
 
+$app->get('/get_catpcha', 'getCAPTCHA');
+$app->post('/validate_catpcha', 'validarCAPTCHA');
+
 $app->run();
 
 function validarEmail($_email) {
@@ -93,6 +96,14 @@ function digitalizarArquivos() {
     }else{
         echo '{"status":false}';
     }
+}
+
+function getCAPTCHA(){
+    
+}
+
+function validarCAPTCHA(){
+    
 }
 
 function create_var_session(app\Controllers\Usuario\Results\UsuarioResult $_s) {
