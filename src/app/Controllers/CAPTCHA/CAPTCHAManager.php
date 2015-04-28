@@ -48,7 +48,7 @@ class CAPTCHAManager {
 
         $palavraRecon = substr($textField, 0, strlen($textField) - $letrasPalavraTest);
 
-        if (strlen($palavraRecon) > 2) {
+        if (strlen($palavraRecon) > 2 && $resultado->status) {
             $palavra = $palavras->ObterPalavraPorId($ids[0]);
             if ($palavra->id == $ids[0]) {
                 $reCaptcha = new \app\Models\EntityModels\TentativasReCAPTCHAModel();
@@ -57,9 +57,10 @@ class CAPTCHAManager {
 
                 $recap = new \app\Models\TentativasReCAPTCHA();
                 $recap->GravarTentativa($reCaptcha);
-                
+
                 if ($palavra->numTentativas_reCAPTCHA >= 9) {
                     $palavra->reconhecida = 1;
+                    $palavra->texto = $recap->ObterTextoMaiorRecorencia($palavra->id);
                 }
                 $palavra->numTentativas_reCAPTCHA++;
                 $palavras->AtualizarTentativasReCaptcha($palavra);
