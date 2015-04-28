@@ -43,7 +43,7 @@ final class GenerateSQLQuery {
 
         foreach ($record as $key => $val) {
             if (!\app\Utils\Functions::StringStartsWith($key, '_'))
-                $sql .= "`$key` = " . $this->quote_smart($val) . ", ";
+                $sql .= "`$key` = " . $this->QuoteSmart($val) . ", ";
         }
 
         $sql = substr($sql, 0, -2) . ' ';
@@ -70,7 +70,7 @@ final class GenerateSQLQuery {
     public function whereClause($keys) {
         $rslt = " where ";
         foreach ($keys as $key => $val) {
-            $rslt .= " (`$key` = " . $this->quote_smart($val) . ") and ";
+            $rslt .= " (`$key` = " . $this->QuoteSmart($val) . ") and ";
         }
         $rslt = substr($rslt, 0, -4);
         return $rslt;

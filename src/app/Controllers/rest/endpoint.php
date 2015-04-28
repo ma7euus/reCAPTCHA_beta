@@ -105,7 +105,12 @@ function getCAPTCHA() {
 }
 
 function validarCAPTCHA() {
-    
+    $app = new \app\libs\Slim\Slim();
+    $dados = $app->request()->getBody();
+
+    $validar = new app\Controllers\CAPTCHA\CAPTCHAManager();
+    $retorno = $validar->ValidarCAPTCHA(json_decode($dados));
+    echo json_encode($retorno);
 }
 
 function create_var_session(app\Controllers\Usuario\Results\UsuarioResult $_s) {

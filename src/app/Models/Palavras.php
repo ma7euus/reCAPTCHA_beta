@@ -57,8 +57,32 @@ final class Palavras {
         return $palavra;
     }
 
-    public function ValidarPalavraCAPTCHA($_id, $_texto) {
-        
+    /**
+     * 
+     * @param type $_id
+     * @return EntityModels\PalavrasModel
+     */
+    public function ObterPalavraPorId($_id) {
+        $palavra = new EntityModels\PalavrasModel();
+
+        $qry = "SELECT * FROM palavras WHERE id = {$_id}";
+        $result = \app\Utils\DB\MySQL\MySQL::Instance()->Select($qry);
+        if ($result->isSuccess()) {
+            $r = $result->getResult();
+            $palavra->SetValues($r[0]);
+            return $palavra;
+        }
+
+        return $palavra;
     }
 
+    /**
+     * 
+     * @param \app\Models\EntityModels\PalavrasModel $_palavra
+     */
+    public function AtualizarTentativasReCaptcha(EntityModels\PalavrasModel $_palavra){
+        $Db = new \app\Utils\DB\DBManager();
+        return $Db->Gravar($_palavra->id, 'palavras', $_palavra);
+    }
+    
 }

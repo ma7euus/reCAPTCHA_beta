@@ -2,7 +2,11 @@
 
 namespace app\Models\EntityModels;
 
-final class PalavrasReCAPTCHA extends EntityModel {
+final class TentativasReCAPTCHAModel extends EntityModel {
+
+    public $id;
+    public $idPalavra;
+    public $textoDigitado;
 
     public function SetDefaultValues() {
         

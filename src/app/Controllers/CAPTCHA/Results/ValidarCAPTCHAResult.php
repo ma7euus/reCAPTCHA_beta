@@ -2,6 +2,12 @@
 
 namespace app\Controllers\CAPTCHA\Results;
 
-class ValidarCAPTCHAResult {
+final class ValidarCAPTCHAResult {
 
+    public $status;
+    public $msg;
+
+    public function __construct($_status) {
+        $this->status = $_status;
+    }
 }

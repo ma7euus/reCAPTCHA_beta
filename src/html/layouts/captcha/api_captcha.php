@@ -26,15 +26,32 @@
                     });
                 });
 
+                $("#btn_test").click(function () {
+                    $("#sign_ajax_loader").show();
+                    
+                    var dados = {};
+                    dados.keyCAPTCHA = key_captcha;
+                    dados.textValidate = $("#captcha_").val();
+                    $.post("http://localhost/reCAPTCHA_beta/src/api/validate_catpcha", JSON.stringify(dados)).always(function () {
+                        //alert("ALWAYS");
+                    }).done(function (result) {
+                        $("#sign_ajax_loader").hide();
+                        //if (result.status)
+                            //$(location).attr('href', 'index.php');
+                        //else
+                          //  $("#div_error_auth").show("slide", {direction: "up"}, "fast");
+                    });
+                });
+
                 $("#update_captcha").click();
             });
 
         </script>
 
     </head>
-    <body>
+    <body style="display: inline-block">
 
-        <div style="position: absolute; width: auto; min-width: 355px; height: auto; background-color: #007f88; border-radius: 5px; padding: 7px">
+        <div style="width: auto; min-width: 355px; height: auto; background-color: #007f88; border-radius: 5px; padding: 7px">
             <div style="position: relative; width: auto; height: auto; background-color: #fff; border-radius: 3px;">
                 <img id="img_0" />
                 <img id="img_1" />
@@ -47,6 +64,11 @@
             <span class="btn btn-primary btn-lg" id="update_captcha" style="position:absolute; margin: -55px 0px 0px 260px;">
                 <i class="glyphicon glyphicon-refresh"></i>
             </span>
+        </div>
+
+        <div style="position: relative;">
+            <button class="btn btn-lg btn-primary" id="btn_test" style="margin: 20px 20px 20px 100px; cursor: pointer" type="button">TESTAR</button>
+            <div style="float: right; display: none;" id="sign_ajax_loader"><img src="<?=HTTP_HTML_DIR?>img/ajax_loader.gif"></div>
         </div>
     </body>
 </html>
