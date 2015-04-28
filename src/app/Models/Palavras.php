@@ -15,13 +15,46 @@ final class Palavras {
         return $Db->Gravar(0, 'palavras', $_palavra);
     }
 
+    /**
+     * 
+     * @return \app\Models\EntityModels\PalavrasModel
+     */
     public function ObterPalavraCAPTCHA() {
+        $palavra = new EntityModels\PalavrasModel();
 
-        $qry = "SELECT * FROM `palavras` WHERE `reconhecida`= 1 AND texto REGEXP '[A-Za-z]{3,20}' ORDER BY RAND() LIMIT 1,1 ";
+        $qry = "SELECT * FROM palavras WHERE reconhecida = 1 AND texto REGEXP '[A-Za-z]{3,25}' ORDER BY RAND() LIMIT 1 ";
+        $result = \app\Utils\DB\MySQL\MySQL::Instance()->Select($qry);
+        if ($result->isSuccess()) {
+            $r = $result->getResult();
+            $palavra->SetValues($r[0]);
+            return $palavra;
+        }
+
+        return $palavra;
     }
 
+    /**
+     * 
+     * @return \app\Models\EntityModels\PalavrasModel
+     */
     public function ObterPalavraParaReconhecimento() {
-        
+        $palavra = new EntityModels\PalavrasModel();
+
+        $qry = "SELECT * FROM palavras "
+                . " WHERE reconhecida = 0 AND texto REGEXP '[A-Za-z]{3,25}' "
+                . " ORDER BY numTentativas_reCAPTCHA DESC LIMIT 1 ";
+
+        $result = \app\Utils\DB\MySQL\MySQL::Instance()->Select($qry);
+        if ($result->isSuccess()) {
+            $r = $result->getResult();
+            if (count($r) > 0) {
+                $palavra->SetValues($r[0]);
+                return $palavra;
+            } else {
+                return $this->ObterPalavraCAPTCHA();
+            }
+        }
+        return $palavra;
     }
 
     public function ValidarPalavraCAPTCHA($_id, $_texto) {

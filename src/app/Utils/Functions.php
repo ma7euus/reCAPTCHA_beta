@@ -90,4 +90,42 @@ final class Functions {
         rmdir($_dir);
     }
 
+    /**
+     * 
+     * @param type $_img
+     * @return \Imagick
+     */
+    public static function DistorcerImgCAPTCHA($_img) {
+
+        $draw = new \ImagickDraw();
+
+        $draw->setStrokeColor("#151715");
+        $draw->setStrokeWidth(2);
+
+        $imagick = new \Imagick();
+        $imagick->readimageblob($_img);
+
+        $draw->line($imagick->getimagewidth() + rand(0, 35), $imagick->getimageheight(), 0, 0);
+        $imagick->drawImage($draw);
+
+        $points = array(
+            '0.' . rand(5, 9), 0,
+            '0.' . rand(1, 9), 0.9,
+            rand(20, 50), rand(10, 30)
+        );
+        $imagick->setImageVirtualPixelMethod(\Imagick::VIRTUALPIXELMETHOD_BACKGROUND);
+        $imagick->distortImage(\Imagick::DISTORTION_AFFINEPROJECTION, $points, TRUE);
+
+        /**$points = array(
+            rand(3, 4) . '.' . rand(0, 9), 0.071451,
+            0.187838, 0.799032,
+            rand(1, 2) . '.' . rand(2, 8), -24.470275, 0.006258, 0.000715
+        );
+
+        $imagick->setImageVirtualPixelMethod(\Imagick::VIRTUALPIXELMETHOD_BACKGROUND);
+        $imagick->distortImage(\Imagick::DISTORTION_PERSPECTIVEPROJECTION, $points, TRUE);
+*/
+        return $imagick;
+    }
+
 }

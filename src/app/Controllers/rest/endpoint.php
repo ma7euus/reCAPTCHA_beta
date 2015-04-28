@@ -91,18 +91,20 @@ function digitalizarArquivos() {
     $result = $arqMgr->ProcessarArquivosGerados($ocrResults);
     $classificador = new \app\Controllers\Processadores\Classificador();
     $result = $classificador->ClassificarArquivos($result);
-    if($arqMgr->GravarArquivosProcessados($result)){
-        echo json_encode(array('status'=>true,'dados'=>$result));
-    }else{
+    if ($arqMgr->GravarArquivosProcessados($result)) {
+        echo json_encode(array('status' => true, 'dados' => $result));
+    } else {
         echo '{"status":false}';
     }
 }
 
-function getCAPTCHA(){
-    
+function getCAPTCHA() {
+    $gerar = new app\Controllers\CAPTCHA\CAPTCHAManager();
+    $captchas = $gerar->GerarCAPTCHA();
+    echo json_encode($captchas);
 }
 
-function validarCAPTCHA(){
+function validarCAPTCHA() {
     
 }
 

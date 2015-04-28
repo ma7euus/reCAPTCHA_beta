@@ -10,14 +10,15 @@ class GerarCAPTCHAResult {
      *
      * @var PalavrasGeradasResult[]
      */
-    public $Palavras;
+    public $CAPTCHAS;
 
     public function __construct() {
-        $this->Palavras = array();
+        $this->CAPTCHAS = array();
+        $this->CAPTCHA_KEY = '';
     }
 
     public function AddPalavrasResult(PalavrasGeradasResult $_palavra) {
-        array_push($this->Palavras, $_palavra);
+        array_push($this->CAPTCHAS, $_palavra);
     }
 
 }

@@ -7,19 +7,45 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+            var key_captcha = null;
+            $(document).ready(function () {
+
+                $("#update_captcha").click(function () {
+                    $.get("http://localhost/reCAPTCHA_beta/src/api/get_catpcha", function (data) {
+                        key_captcha = data.CAPTCHA_KEY;
+                        $.each(data.CAPTCHAS, function (index, value) {
+                            $("img#img_" + value.imgOrder).attr("src", "data:image/jpg;base64," + value.imgBase64);
+                            $("img#img_" + value.imgOrder).css({
+                                "position": "relative",
+                                "margin": "10px",
+                                "max-width": "200px",
+                            });
+                        });
+                    });
+                });
+
+                $("#update_captcha").click();
+            });
+
+        </script>
+
     </head>
     <body>
-        <div style="position: absolute; width: 335px; height: 135px; background-color: #007f88; border-radius: 5px; padding: 7px">
-            <div style="position: absolute; width: 320px; height: 60px; background-color: #fff; border-radius: 3px;">
-                
+
+        <div style="position: absolute; width: auto; min-width: 355px; height: auto; background-color: #007f88; border-radius: 5px; padding: 7px">
+            <div style="position: relative; width: auto; height: auto; background-color: #fff; border-radius: 3px;">
+                <img id="img_0" />
+                <img id="img_1" />
             </div>
-            <div style="margin: 68px 0px; position: absolute; padding: 3px; width: 250px; height: 53px; background-color: #337ab7; border-radius: 3px; color: #fff">
+            <div style="margin: 10px 0px; position: relative; padding: 3px; width: 250px; height: 53px; background-color: #337ab7; border-radius: 3px; color: #fff">
                 <div class="input-group input-group-lg">
                     <input type="text" class="form-control" style="color: #222" id="captcha_" placeholder="Digite as palavras acima...">
                 </div>
             </div>
-            <span class="btn btn-primary btn-lg" style="margin: 75px 260px;">
-                    <i class="glyphicon glyphicon-refresh"></i>
+            <span class="btn btn-primary btn-lg" id="update_captcha" style="position:absolute; margin: -55px 0px 0px 260px;">
+                <i class="glyphicon glyphicon-refresh"></i>
             </span>
         </div>
     </body>
