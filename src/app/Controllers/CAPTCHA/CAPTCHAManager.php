@@ -51,18 +51,25 @@ class CAPTCHAManager {
         if (strlen($palavraRecon) > 2 && $resultado->status) {
             $palavra = $palavras->ObterPalavraPorId($ids[0]);
             if ($palavra->id == $ids[0]) {
-                $reCaptcha = new \app\Models\EntityModels\TentativasReCAPTCHAModel();
-                $reCaptcha->idPalavra = $palavra->id;
-                $reCaptcha->textoDigitado = $palavraRecon;
-
-                $recap = new \app\Models\TentativasReCAPTCHA();
-                $recap->GravarTentativa($reCaptcha);
-
-                if ($palavra->numTentativas_reCAPTCHA >= 9) {
+                if (strcasecmp($palavraRecon, $palavra->texto) == 0) {
+                    $palavra->numTentativas_reCAPTCHA = 10;
                     $palavra->reconhecida = 1;
-                    $palavra->texto = $recap->ObterTextoMaiorRecorencia($palavra->id);
+                } else {
+
+                    $reCaptcha = new \app\Models\EntityModels\TentativasReCAPTCHAModel();
+                    $reCaptcha->idPalavra = $palavra->id;
+                    $reCaptcha->textoDigitado = $palavraRecon;
+
+                    $recap = new \app\Models\TentativasReCAPTCHA();
+                    $recap->GravarTentativa($reCaptcha);
+
+                    if ($palavra->numTentativas_reCAPTCHA >= 9) {
+                        $palavra->reconhecida = 1;
+                        $palavra->texto = $recap->ObterTextoMaiorRecorencia($palavra->id);
+                    }
+
+                    $palavra->numTentativas_reCAPTCHA++;
                 }
-                $palavra->numTentativas_reCAPTCHA++;
                 $palavras->AtualizarTentativasReCaptcha($palavra);
             }
         }

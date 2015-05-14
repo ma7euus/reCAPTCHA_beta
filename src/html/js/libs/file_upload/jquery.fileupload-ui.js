@@ -521,6 +521,11 @@
             var button = $(e.currentTarget);
             _sendToOCRProcess(e);
         },
+        _downloadDigFileHandler: function (e) {
+            e.preventDefault();
+            var button = $(e.currentTarget);
+            _getTXTFile(e);
+        },
         _cancelHandler: function (e) {
             e.preventDefault();
             var template = $(e.currentTarget)
@@ -630,7 +635,8 @@
                 'click .start': this._startHandler,
                 'click .cancel': this._cancelHandler,
                 'click .delete': this._deleteHandler,
-                'click .start-dig': this._startOCRDigHandler
+                'click .start-dig': this._startOCRDigHandler,
+                'click .download-dig-file': this._downloadDigFileHandler
             });
             this._initButtonBarEventHandlers();
         },

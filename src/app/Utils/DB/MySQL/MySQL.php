@@ -80,6 +80,7 @@ class MySQL {
      */
 
     public function Select($qry, $resultType = MYSQLI_ASSOC) {
+        MySQL::Instance()->SetCharset('utf8');
         $result = $this->connection->query($qry);
 
         if (!$result) {

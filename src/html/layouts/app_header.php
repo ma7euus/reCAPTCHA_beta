@@ -58,7 +58,7 @@
         <!--[if (gte IE 8)&(lt IE 10)]>
         <script src="js/cors/jquery.xdr-transport.js"></script>
         <![endif]-->
-        
+
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -67,18 +67,8 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        
-        <script type="text/javascript" src="<?= HTTP_HTML_DIR ?>js/file_list_helper.js">
-        
-        <script type="text/javascript">
 
-             //           $(document).ready(function (){
-             //$.get("api/email_exist/mateus@gmail.com", function(data) {
-             //$(".result" ).html(data);
-             //alert("Load was performed.");
-             //});
-             //});
-             
-        </script>
+        <script type="text/javascript" src="<?= HTTP_HTML_DIR ?>js/file_list_helper.js"></script>
+        <script type="text/javascript" src="<?= HTTP_HTML_DIR ?>js/libs/jquery.simulate.js"></script>
 
-    </head>
+</head>

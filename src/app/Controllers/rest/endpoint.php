@@ -45,6 +45,33 @@ $app->post('/ocr_exe', 'digitalizarArquivos');
 $app->get('/get_catpcha', 'getCAPTCHA');
 $app->post('/validate_catpcha', 'validarCAPTCHA');
 
+//$app->post('/download_txt', 'gerarArquivoTXT');
+
+$app->post('/download_txt', function () use ($app) {
+
+    $dados = $app->request()->getBody();
+
+    $arqMgr = new \app\Controllers\Arquivos\ArquivosMgr();
+    $_arq = $arqMgr->ObterDadosArquivo(json_decode($dados));
+    $processador = new app\Controllers\Processadores\ArquivoProcessador();
+    $dados = $processador->MontarTextoArquivo($_arq);
+    $dados->nomeImagem .= '.txt';
+
+    if (strlen($dados->textoProcessado) > 0) {
+        $localizacao = $arqMgr->GetPathBase();
+        if (\app\Utils\Functions::CreateFolder($localizacao, 'text')) {
+            $dir = "{$localizacao}text/";
+            $fp = fopen("{$dir}{$dados->nomeImagem}", "w+");
+            fwrite($fp, $dados->textoProcessado);
+            fclose($fp);
+            $url = HTTP_DIR . "/user_files/" . \app\Controllers\Usuario\UsuarioAuth::$_userPath . "/text/";
+            echo "{\"status\":\"true\", \"msg\": \"\", \"link\": \"{$url}{$dados->nomeImagem}\"}";
+        }
+    } else {
+        echo '{"status":"false", "msg": ""}';
+    }
+});
+
 $app->run();
 
 function validarEmail($_email) {
@@ -111,6 +138,26 @@ function validarCAPTCHA() {
     $validar = new app\Controllers\CAPTCHA\CAPTCHAManager();
     $retorno = $validar->ValidarCAPTCHA(json_decode($dados));
     echo json_encode($retorno);
+}
+
+function gerarArquivoTXT() {
+    $app = new \app\libs\Slim\Slim();
+    $dados = $app->request()->getBody();
+    $arqMgr = new \app\Controllers\Arquivos\ArquivosMgr();
+
+    $_arq = $arqMgr->ObterDadosArquivo(json_decode($dados));
+    $processador = new app\Controllers\Processadores\ArquivoProcessador();
+    $dados = $processador->MontarTextoArquivo($_arq);
+    $dados->nomeImagem .= '.txt';
+    $app->response()->header('Expires: 0');
+    $app->response()->header('Cache-Control: must-revalidate, pre-check=0, post-check=0');
+    $app->response()->header('Cache-Control: public');
+    $app->response()->header('Content-Description: File Transfer');
+    $app->response()->header('Content-Type', 'application/text;charset=utf-8');
+    $app->response()->header("Content-Disposition: attachment; filename='{$dados->nomeImagem}'");
+    $app->response()->body($dados->textoProcessado);
+
+    //echo $dados->textoProcessado;
 }
 
 function create_var_session(app\Controllers\Usuario\Results\UsuarioResult $_s) {

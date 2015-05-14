@@ -130,6 +130,10 @@
                         <i class="glyphicon glyphicon-cog"></i>
                     <span>Digitalizar</span>
                 </button>
+                <button style="display: none;" class="btn btn-default download-dig-file ocr_file" data-type="POST" id="download_{%=file.tmpId%}" name="download_{%=file.name%}">
+                        <i class="glyphicon glyphicon-download-alt"></i>
+                    <span>Baixar TXT</span>
+                </button>
                 <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
                     <span>Deletar</span>

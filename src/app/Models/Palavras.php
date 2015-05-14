@@ -42,7 +42,7 @@ final class Palavras {
 
         $qry = "SELECT * FROM palavras "
                 . " WHERE reconhecida = 0 AND texto REGEXP '[A-Za-z]{3,25}' "
-                . " ORDER BY numTentativas_reCAPTCHA DESC LIMIT 1 ";
+                . " ORDER BY taxaAcertoOCR ASC, numTentativas_reCAPTCHA DESC LIMIT 1 ";
 
         $result = \app\Utils\DB\MySQL\MySQL::Instance()->Select($qry);
         if ($result->isSuccess()) {
@@ -80,9 +80,35 @@ final class Palavras {
      * 
      * @param \app\Models\EntityModels\PalavrasModel $_palavra
      */
-    public function AtualizarTentativasReCaptcha(EntityModels\PalavrasModel $_palavra){
+    public function AtualizarTentativasReCaptcha(EntityModels\PalavrasModel $_palavra) {
         $Db = new \app\Utils\DB\DBManager();
         return $Db->Gravar($_palavra->id, 'palavras', $_palavra);
     }
-    
+
+    /**
+     * 
+     * @param type $_idArquivo
+     * @return \app\Models\EntityModels\PalavrasModel[]
+     */
+    public function ObterPalavrasPorIdArquivo($_idArquivo) {
+        $palavras = array();
+        $palavra = new EntityModels\PalavrasModel();
+
+        $qry = "SELECT p.* FROM palavras p"
+                . " LEFT JOIN arquivos_digitalizados ad ON p.idArquivo = ad.id "
+                . "WHERE p.idArquivo = {$_idArquivo}";
+
+        $resultado = \app\Utils\DB\MySQL\MySQL::Instance()->Select($qry);
+        if ($resultado->isSuccess()) {
+            $ps = $resultado->getResult();
+            foreach ($ps as $p) {
+                $palavra = new EntityModels\PalavrasModel();
+                $palavra->SetValues($p);
+                array_push($palavras, $palavra);
+            }
+        }
+
+        return $palavras;
+    }
+
 }

@@ -43,7 +43,7 @@ final class ArquivosMgr {
             $arquivoResult->nomeImagem = $ocrResult_value->arqNameRef;
             $arquivoResult->tempo = $ocrResult_value->processingTime;
             $arquivoResult->tmpId = $ocrResult_value->tmpId;
-            
+
             foreach (glob("{$ocrResult_value->path}*.xml") as $file_value) {
                 $xml = new Imp\ImportarDadosXML();
                 $arquivoResult->AddDadosXML($xml->Importar(new Arguments\ArquivoArgs($file_value, 'text', 'xml', $ocrResult_value->path)));
@@ -71,8 +71,32 @@ final class ArquivosMgr {
                 $palavras->GravarPalavras($palavra);
             }
         }
-        
+
         return true;
     }
 
+    /**
+     * 
+     * @param array $_args
+     * @return \app\Models\EntityModels\ArquivosDigitalizadosModel
+     */
+    public function ObterDadosArquivo(array $_args) {
+
+        $arq = new \app\Models\ArquivosDigitalizados();
+        $palavraM = new \app\Models\Palavras();
+
+        foreach ($_args as $arquivo) {
+            $arqModel = $arq->ObterArquivoPorNome($arquivo->nome);
+            $palavras = $palavraM->ObterPalavrasPorIdArquivo($arqModel->id);
+            foreach ($palavras as $palavra) {
+                $arqModel->AddPalavra($palavra);
+            }
+        }
+        
+        return $arqModel;
+    }
+
+    public function GetPathBase(){
+        return $this->_pathBase;
+    }
 }
