@@ -70,6 +70,7 @@ function _getTXTFile(e) {
             
             $(ancora).insertBefore('footer');
             $("#" + $(e.target).attr("id") + "_link").simulate('click');
+            ancora.remove();
         }
     });
 }

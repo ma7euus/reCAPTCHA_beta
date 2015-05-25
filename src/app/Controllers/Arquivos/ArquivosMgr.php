@@ -67,8 +67,10 @@ final class ArquivosMgr {
             $result->dadosArquivoDigitalizado->idUsuario = \app\Controllers\Usuario\UsuarioAuth::$_userID;
             $idArquivo = $arquivo->GravarArquivoDigitalizado($result->dadosArquivoDigitalizado);
             foreach ($result->dadosPalavras as $palavra) {
-                $palavra->idArquivo = $idArquivo;
-                $palavras->GravarPalavras($palavra);
+                if (strlen(trim($palavra->texto)) > 0) {
+                    $palavra->idArquivo = $idArquivo;
+                    $palavras->GravarPalavras($palavra);
+                }
             }
         }
 
@@ -92,11 +94,12 @@ final class ArquivosMgr {
                 $arqModel->AddPalavra($palavra);
             }
         }
-        
+
         return $arqModel;
     }
 
-    public function GetPathBase(){
+    public function GetPathBase() {
         return $this->_pathBase;
     }
+
 }

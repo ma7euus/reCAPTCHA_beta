@@ -17,6 +17,7 @@ final class TesseractOCRAPI {
         array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs(null, $_img_file_path));
         array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs(null, $_txt_file_result));
         array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs('l', $_lang));
+        //array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs('psm', '2'));
     }
 
     /**
