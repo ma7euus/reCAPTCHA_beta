@@ -35,23 +35,26 @@ class CAPTCHAManager {
 
         $ids = explode('_', base64_decode($_dados->keyCAPTCHA));
 
-        $textField = str_replace(' ', '', $_dados->textValidate);
+        //$textField = str_replace(' ', '', $_dados->textValidate);
+        $textField = $_dados->textValidate;
 
         $palavras = new \app\Models\Palavras();
         $palavra = $palavras->ObterPalavraPorId($ids[1]);
         $letrasPalavraTest = strlen($palavra->texto);
 
-        $strCaptchaTest = substr($textField, strlen($textField) - ($letrasPalavraTest), $letrasPalavraTest);
-        if (strcasecmp($strCaptchaTest, $palavra->texto) == 0) {
+        $strCaptchaTest = trim(substr($textField, strlen($textField) - ($letrasPalavraTest), $letrasPalavraTest));
+
+        if (strcmp($strCaptchaTest, trim($palavra->texto)) == 0) {
             $resultado->status = true;
         }
 
-        $palavraRecon = substr($textField, 0, strlen($textField) - $letrasPalavraTest);
+        $palavraRecon = trim(substr($textField, 0, strlen($textField) - $letrasPalavraTest));
 
         if (strlen($palavraRecon) > 2 && $resultado->status) {
             $palavra = $palavras->ObterPalavraPorId($ids[0]);
             if ($palavra->id == $ids[0]) {
-                if (strcasecmp($palavraRecon, $palavra->texto) == 0) {
+                $jaReconhecida = $palavra->reconhecida == 1 ? true : false;
+                if (strcmp($palavraRecon, trim($palavra->texto)) == 0) {
                     $palavra->numTentativas_reCAPTCHA = 10;
                     $palavra->reconhecida = 1;
                 } else {
@@ -71,6 +74,10 @@ class CAPTCHAManager {
                     $palavra->numTentativas_reCAPTCHA++;
                 }
                 $palavras->AtualizarTentativasReCaptcha($palavra);
+                if($palavra->reconhecida && $jaReconhecida === false){
+                    \app\Models\ArquivosDigitalizados::AtribuirPalavraReconhecida($palavra->idArquivo);
+                }
+                    
             }
         }
 

@@ -105,6 +105,9 @@ final class Functions {
         $imagick = new \Imagick();
         $imagick->readimageblob($_img);
 
+        if($imagick->getimageheight() < 30)
+            return $imagick;
+        
         $draw->line($imagick->getimagewidth() + rand(0, 35), $imagick->getimageheight(), 0, 0);
         $imagick->drawImage($draw);
 
@@ -115,7 +118,7 @@ final class Functions {
         );
         $imagick->setImageVirtualPixelMethod(\Imagick::VIRTUALPIXELMETHOD_BACKGROUND);
         $imagick->distortImage(\Imagick::DISTORTION_AFFINEPROJECTION, $points, TRUE);
-
+        //$imagick->resizeimage(100, 50, null, 1);
         /**$points = array(
             rand(3, 4) . '.' . rand(0, 9), 0.071451,
             0.187838, 0.799032,

@@ -298,6 +298,8 @@ class UploadHandler {
             $file = new \stdClass();
             $file->tmpId = \app\Utils\Functions::GenerateUniqueID();
             $file->name = $file_name;
+            $arq = new \app\Models\ArquivosDigitalizados();
+            $file->ArquivoDigitalizado = $arq->ObterArquivoPorNome($file_name);
             $file->size = $this->get_file_size(
                     $this->get_upload_path($file_name)
             );
@@ -980,6 +982,8 @@ class UploadHandler {
         $file->name = $this->get_file_name($uploaded_file, $name, $size, $type, $error, $index, $content_range);
         $file->size = $this->fix_integer_overflow(intval($size));
         $file->type = $type;
+        $file->tmpId = \app\Utils\Functions::GenerateUniqueID();
+        $file->ArquivoDigitalizado = new \app\Models\EntityModels\ArquivosDigitalizadosModel();
         if ($this->validate($uploaded_file, $file, $error, $index)) {
             $this->handle_form_data($file, $index);
             $upload_dir = $this->get_upload_path();
@@ -1253,6 +1257,8 @@ class UploadHandler {
                         $file = $this->get_upload_path($file_name, $version);
                         if (is_file($file)) {
                             unlink($file);
+                            $arqModel = new \app\Models\ArquivosDigitalizados();
+                            $arqModel->DeletarArquivoPorNome($file_name);
                         }
                     }
                 }

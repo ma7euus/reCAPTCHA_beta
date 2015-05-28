@@ -54,12 +54,12 @@ final class GenerateSQLQuery {
 
     /**
      * 
-     * @param type $value
+     * @param type $_value
      * @return type
      */
-    public function QuoteSmart($value) {
-        $value = "'" . utf8_decode(str_replace('\'', "", $value)) . "'";
-        return utf8_encode($value);
+    public function QuoteSmart($_value) {
+        $_value = "'" . utf8_decode(str_replace('\'', "", str_replace("\\'", '', $_value))) . "'";
+        return utf8_encode($_value);
     }
 
     /**

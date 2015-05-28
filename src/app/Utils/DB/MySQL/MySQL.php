@@ -123,8 +123,8 @@ class MySQL {
      * @param type string
      * @return Results\DataBaseResult
      */
-    public function Execute($qry) {
-        $dbResult = $this->connection->query($qry);
+    public function Execute($qry, $multi = false) {
+        $dbResult = $multi === false ? $this->connection->query($qry) : $this->connection->multi_query($qry);
 
         $dbResultProxy = new Results\DataBaseResultProxy();
         $args = new Results\DataBaseResultArgs($qry, $this->connection);

@@ -14,7 +14,10 @@ final class ImportarPalavraIMG implements IImportarDados {
     public function Importar(ArquivoArgs $_args) {
         $arquivo = new \app\Controllers\Arquivos\Results\ArquivoImpPalavraIMGResult();
 
-        $arquivo->dados = file_get_contents("{$_args->localizacao}{$_args->nome}.{$_args->extencao}");
+        $arquivo->dados = null;
+        if(file_exists("{$_args->localizacao}{$_args->nome}.{$_args->extencao}")){
+            $arquivo->dados = file_get_contents("{$_args->localizacao}{$_args->nome}.{$_args->extencao}");   
+        }
 
         return $arquivo;
     }
