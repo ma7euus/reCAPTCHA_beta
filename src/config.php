@@ -10,7 +10,8 @@ define("HTTP_HTML_DIR", 'http://' . SERVER_DIR . '/html/');
 date_default_timezone_set('America/Sao_Paulo');
 setlocale(LC_ALL, "en_US");
 
-ini_set('session.hash_function', '1');
+ini_set('session.hash_function', '1'); 
+//session_destroy();
 session_start();
 
 require_once APP_SERVER_DIR . 'app/libs/debug/firephp/fb.php';

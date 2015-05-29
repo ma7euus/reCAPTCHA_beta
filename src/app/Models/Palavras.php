@@ -40,9 +40,10 @@ final class Palavras {
     public function ObterPalavraParaReconhecimento() {
         $palavra = new EntityModels\PalavrasModel();
 
-        $qry = "SELECT * FROM palavras "
-                . " WHERE reconhecida = 0 AND texto REGEXP '[A-Za-z]{3,25}' "
-                . " ORDER BY taxaAcertoOCR ASC, numTentativas_reCAPTCHA DESC LIMIT 1 ";
+        $qry = "SELECT p.* FROM palavras p "
+                . "JOIN arquivos_digitalizados a ON p.idArquivo = a.id " 
+                . " WHERE p.reconhecida = 0 AND p.texto REGEXP '[A-Za-z]{3,25}' "
+                . " ORDER BY a.id ASC, p.taxaAcertoOCR ASC, p.numTentativas_reCAPTCHA DESC LIMIT 1 ";
 
         $result = \app\Utils\DB\MySQL\MySQL::Instance()->Select($qry);
         if ($result->isSuccess()) {
