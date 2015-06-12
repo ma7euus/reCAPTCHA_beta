@@ -10,7 +10,7 @@ final class TesseractOCRAPI {
      */
     private $_tessArgs = array();
 
-    public function __construct($_img_file_path, $_txt_file_result, $_lang = 'eng' /* or eng */) {
+    public function __construct($_img_file_path, $_txt_file_result, $_lang = 'por' /* or eng */) {
         // array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs(null, 'sudo'));
         // array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs('u', 'mateus'));
         array_push($this->_tessArgs, new \app\Controllers\OCR\Arguments\TesseractOCRAPIArgs(null, 'tesseract'));
