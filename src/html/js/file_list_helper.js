@@ -4,6 +4,9 @@ $(document).ready(function () {
         console.log($(this));
     });
 
+    $(".log-out").bind('click', function () {
+        _logOut();
+    });
 });
 
 
@@ -65,12 +68,23 @@ function _getTXTFile(e) {
             ancora.attr('href', result.link);
             ancora.attr('id', $(e.target).attr("id") + "_link");
             ancora.css({
-                "display" : "none"
+                "display": "none"
             });
-            
+
             $(ancora).insertBefore('footer');
             $("#" + $(e.target).attr("id") + "_link").simulate('click');
             ancora.remove();
         }
     });
+}
+
+function _logOut() {
+    $.get("api/close_session").always(function () {
+
+    }).done(function (result) {
+        if (result.status) {
+            $(location).attr('href', 'index.php');
+        }
+    });
+
 }

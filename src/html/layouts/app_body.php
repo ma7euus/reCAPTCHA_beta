@@ -1,5 +1,11 @@
 <body style="background-color: #efefef">
   <div class="container">
+    <div style="float: right;">
+        <button type="submit" class="btn btn-default log-out">
+                    <i class="glyphicon glyphicon-log-out"></i>
+                    <span>Sair</span>
+                </button>
+    </div>
     <h1>OCR WEB</h1>
     <h2 class="lead">Gereciamento de arquivos</h2>
     <br>

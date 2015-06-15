@@ -45,6 +45,20 @@ $app->post('/ocr_exe', 'digitalizarArquivos');
 $app->get('/get_catpcha', 'getCAPTCHA');
 $app->post('/validate_catpcha', 'validarCAPTCHA');
 
+$app->get('/close_session', function () {
+    $r = session_destroy();
+    if ($r) {
+        \app\Controllers\Usuario\UsuarioAuth::$_apiKey = NULL;
+        \app\Controllers\Usuario\UsuarioAuth::$_userID = NULL;
+        \app\Controllers\Usuario\UsuarioAuth::$_userPath = NULL;
+        $retorno = array();
+        $retorno['status'] = true;
+    } else {
+        $retorno = array();
+        $retorno['status'] = false;
+    }
+    echo json_encode($retorno);
+});
 //$app->post('/download_txt', 'gerarArquivoTXT');
 
 $app->post('/download_txt', function () use ($app) {
