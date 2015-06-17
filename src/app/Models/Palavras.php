@@ -22,7 +22,7 @@ final class Palavras {
     public function ObterPalavraCAPTCHA() {
         $palavra = new EntityModels\PalavrasModel();
 
-        $qry = "SELECT * FROM palavras WHERE reconhecida = 1 AND texto REGEXP '[A-Za-z]{3,25}' ORDER BY RAND() LIMIT 1 ";
+        $qry = "SELECT * FROM palavras WHERE reconhecida = 1 AND texto REGEXP '[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9]{3,25}' ORDER BY RAND() LIMIT 1 ";
         $result = \app\Utils\DB\MySQL\MySQL::Instance()->Select($qry);
         if ($result->isSuccess()) {
             $r = $result->getResult();
@@ -42,9 +42,9 @@ final class Palavras {
 
         $qry = "SELECT p.* FROM palavras p "
                 . "JOIN arquivos_digitalizados a ON p.idArquivo = a.id " 
-                . " WHERE p.reconhecida = 0 AND p.texto REGEXP '[A-Za-z]{3,25}' "
+                . " WHERE p.reconhecida = 0 AND p.texto REGEXP '[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ?!0-9]{1,25}' "
                 . " ORDER BY a.id ASC, p.taxaAcertoOCR ASC, p.numTentativas_reCAPTCHA DESC LIMIT 1 ";
-
+        //fb($qry);
         $result = \app\Utils\DB\MySQL\MySQL::Instance()->Select($qry);
         if ($result->isSuccess()) {
             $r = $result->getResult();
@@ -52,6 +52,7 @@ final class Palavras {
                 $palavra->SetValues($r[0]);
                 return $palavra;
             } else {
+                //fb('documento digitalizado!');
                 return $this->ObterPalavraCAPTCHA();
             }
         }
@@ -82,6 +83,7 @@ final class Palavras {
      * @param \app\Models\EntityModels\PalavrasModel $_palavra
      */
     public function AtualizarTentativasReCaptcha(EntityModels\PalavrasModel $_palavra) {
+        \app\Utils\DB\MySQL\MySQL::Instance()->connection->set_charset('utf8');
         $Db = new \app\Utils\DB\DBManager();
         return $Db->Gravar($_palavra->id, 'palavras', $_palavra);
     }

@@ -27,9 +27,13 @@ final class ClassificadorResult {
 
     public function AddDadosPalavra(\app\Models\EntityModels\PalavrasModel $_palavra) {
         array_push($this->dadosPalavras, $_palavra);
-        $this->dadosArquivoDigitalizado->numTotalPalavras++;
-        if ($_palavra->reconhecida)
-            $this->dadosArquivoDigitalizado->numPalavrasCorretas++;
+        $re = "/^[A-Za-z0-9]*$/";
+        $p = preg_match($re, trim($_palavra->texto));
+        if(trim($_palavra->texto) != '' && count($p) > 0){
+            $this->dadosArquivoDigitalizado->numTotalPalavras++;
+            if ($_palavra->reconhecida)
+                $this->dadosArquivoDigitalizado->numPalavrasCorretas++;
+        }
     }
 
 }

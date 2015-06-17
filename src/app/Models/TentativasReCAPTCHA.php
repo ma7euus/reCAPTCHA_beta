@@ -10,6 +10,7 @@ final class TentativasReCAPTCHA {
      * @return type
      */
     public function GravarTentativa(EntityModels\TentativasReCAPTCHAModel $_tentativa) {
+        \app\Utils\DB\MySQL\MySQL::Instance()->connection->set_charset('utf8');
         $Db = new \app\Utils\DB\DBManager();
         return $Db->Gravar(0, 'tentativas_recaptcha', $_tentativa);
     }

@@ -1,0 +1,23 @@
+dig01: Total: 73
+Reconhecidas: 38
+Captchas: 45
+
+dig02: Total: 60
+Reconhecidas: 0
+Captchas: 124
+
+dig03: Total: 83
+Reconhecidas: 0
+Captchas: 325
+
+dig03: Total: 83
+Reconhecidas: 0
+Captchas: 325
+
+dig04: Total: 55
+Reconhecidas: 0
+Captchas: 466
+
+dig05: Total: 127
+Reconhecidas: 38
+Captchas: 227

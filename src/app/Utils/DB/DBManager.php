@@ -24,6 +24,8 @@ final class DBManager {
             $qry = $generateSQL->updateQuery($_table, $_obj, array("id" => $_id));
         }
         
+        //fb($qry);
+        
         if ($qry != "") {
             MySQL\MySQL::Instance()->connection->set_charset("utf8");
             $resultMySQL = MySQL\MySQL::Instance()->Execute($qry);

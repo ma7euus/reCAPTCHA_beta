@@ -12,6 +12,12 @@
             var key_captcha = null;
             $(document).ready(function () {
 
+                $("#captcha_").bind('keypress', function (event){
+                    if(event.keyCode == 13){
+                        $("#btn_test").click();
+                    }
+                });
+
                 $("#update_captcha").click(function () {
                     $.get("http://localhost/reCAPTCHA_beta/src/api/get_catpcha", function (data) {
                         key_captcha = data.CAPTCHA_KEY;
@@ -36,7 +42,14 @@
                         //alert("ALWAYS");
                     }).done(function (result) {
                         $("#sign_ajax_loader").hide();
-                        //if (result.status)
+                        if (result.status){
+                            var num = parseInt($("#numTentativas").html());
+                            num++;
+                            $("#numTentativas").html(num);
+                            if(result._recog){
+                                $("#update_captcha").click();
+                            }
+                        }
                             //$(location).attr('href', 'index.php');
                         //else
                           //  $("#div_error_auth").show("slide", {direction: "up"}, "fast");
@@ -69,6 +82,10 @@
         <div style="position: relative;">
             <button class="btn btn-lg btn-primary" id="btn_test" style="margin: 20px 20px 20px 100px; cursor: pointer" type="button">TESTAR</button>
             <div style="float: right; display: none;" id="sign_ajax_loader"><img src="<?=HTTP_HTML_DIR?>img/ajax_loader.gif"></div>
+        </div>
+        </br>
+        <div style="display: inline; position: relative; margin-left: 50px; font-size: large;">
+            <span style="display: inline-block">Tentativas: <span style="font-weight: bold" id="numTentativas">0</span></span>
         </div>
     </body>
 </html>
