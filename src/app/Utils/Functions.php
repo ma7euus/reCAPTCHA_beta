@@ -105,8 +105,8 @@ final class Functions {
         $imagick = new \Imagick();
         $imagick->readimageblob($_img);
 
-        if($imagick->getimageheight() < 30)
-            return $imagick;
+        //if($imagick->getimageheight() < 30)
+        //    return $imagick;
         
         $draw->line($imagick->getimagewidth() + rand(0, 35), $imagick->getimageheight(), 0, 0);
         $imagick->drawImage($draw);

@@ -85,6 +85,10 @@ class CAPTCHAManager {
             $resultado->_recog = $palavra->reconhecida;
         }
 
+        if(!$resultado->status){
+            $resultado->msg = "CAPTCHA inválido! Tente novamente!";
+        }
+        
         return $resultado;
     }
 

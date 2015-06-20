@@ -34,6 +34,7 @@
 
                 $("#btn_test").click(function () {
                     $("#sign_ajax_loader").show();
+                    $("#div_error_captcha").hide("slide", {direction: "up"}, "fast");
                     
                     var dados = {};
                     dados.keyCAPTCHA = key_captcha;
@@ -49,6 +50,11 @@
                             if(result._recog){
                                 $("#update_captcha").click();
                             }
+                        }else{
+                            $("#div_error_captcha").show("slide", {direction: "up"}, "fast");
+                            $("#mgs_error_captcha").html(result.msg);
+                            //$("#captcha_").val("");
+                            //$("#update_captcha").click();
                         }
                             //$(location).attr('href', 'index.php');
                         //else
@@ -77,6 +83,9 @@
             <span class="btn btn-primary btn-lg" id="update_captcha" style="position:absolute; margin: -55px 0px 0px 260px;">
                 <i class="glyphicon glyphicon-refresh"></i>
             </span>
+            <div class="form-control" id="div_error_captcha" style="display: none; background-color: crimson; height: 35px; text-align: center; color: #efefef;">
+                <span id="mgs_error_captcha" style="font-weight: bold;"></span>
+            </div>
         </div>
 
         <div style="position: relative;">
