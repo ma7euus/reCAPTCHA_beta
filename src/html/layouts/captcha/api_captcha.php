@@ -93,7 +93,7 @@
             <div style="float: right; display: none;" id="sign_ajax_loader"><img src="<?=HTTP_HTML_DIR?>img/ajax_loader.gif"></div>
         </div>
         </br>
-        <div style="display: inline; position: relative; margin-left: 50px; font-size: large;">
+        <div style="display: none; position: relative; margin-left: 50px; font-size: large;">
             <span style="display: inline-block">Tentativas: <span style="font-weight: bold" id="numTentativas">0</span></span>
         </div>
     </body>

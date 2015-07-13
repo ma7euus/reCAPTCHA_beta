@@ -1,7 +1,5 @@
 <?php
 
-//namespace app\controllers\rest;
-
 require_once '../../../config.php';
 
 \app\libs\Slim\Slim::registerAutoloader();
